@@ -1,6 +1,6 @@
 //! Represents a MongoDB database.
 
-use mongodb::db::ThreadedDatabase;
+use mongodb::Database;
 use crate::{
     coll::Collection,
     doc::Doc,
@@ -13,8 +13,14 @@ use magnet_schema::BsonSchema;
 #[cfg(feature = "schema_validation")]
 use crate::uid::Uid;
 
+pub trait DatabaseExt {
+    fn existing_collection<T: Doc>(&self) -> Collection<T>;
+    fn empty_collection<T>(&self) -> Result<Collection<T>>;
+    fn empty_collection_novalidate<T: Doc>(&self) -> Result<Collection<T>>;
+}
+
 /// Methods augmenting MongoDB `ThreadedDatabase` types.
-pub trait DatabaseExt: ThreadedDatabase {
+impl DatabaseExt for Database{
     /// Returns an existing collection without dropping/recreating it.
     fn existing_collection<T: Doc>(&self) -> Collection<T> {
         self.collection(T::NAME).into()
@@ -30,7 +36,6 @@ pub trait DatabaseExt: ThreadedDatabase {
               Uid<T>: BsonSchema,
     {
         use bson::Bson;
-        use mongodb::CommandType;
         use crate::bsn::BsonExt;
         use crate::error::Error;
 
@@ -92,4 +97,4 @@ pub trait DatabaseExt: ThreadedDatabase {
     }
 }
 
-impl<T: ThreadedDatabase> DatabaseExt for T {}
+impl<T: Database> DatabaseExt for T {}

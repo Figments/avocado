@@ -10,7 +10,7 @@ use crate::error::{ Error, ErrorKind, Result, ResultExt };
 /// A typed wrapper around the MongoDB `Cursor` type.
 pub struct Cursor<T> {
     /// The underlying MongoDB cursor.
-    inner: mongodb::cursor::Cursor,
+    inner: mongodb::Cursor,
     /// The function applied to each returned `Document` before deserialization.
     transform: fn(Document) -> Result<Bson>,
     /// Just here so that the type parameter is used.
@@ -22,7 +22,7 @@ impl<T> Cursor<T> where T: for<'a> Deserialize<'a> {
     /// and a transformation function.
     #[doc(hidden)]
     pub fn from_cursor_and_transform(
-        inner: mongodb::cursor::Cursor,
+        inner: mongodb::Cursor,
         transform: fn(Document) -> Result<Bson>,
     ) -> Self {
         Cursor {

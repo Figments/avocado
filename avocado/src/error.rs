@@ -355,18 +355,18 @@ macro_rules! impl_error_type {
     }
 }
 
-impl_error_type! { serde_json::Error,  JsonTranscoding,    "JSON transcoding error" }
-impl_error_type! { bson::EncoderError, BsonEncoding,       "BSON encoding error" }
-impl_error_type! { bson::DecoderError, BsonDecoding,       "BSON decoding error" }
-impl_error_type! { bson::oid::Error,   ObjectIdGeneration, "ObjectId generation error" }
-impl_error_type! { mongodb::Error,     MongoDbError,       "MongoDB error" }
+impl_error_type! { serde_json::Error,       JsonTranscoding,    "JSON transcoding error" }
+impl_error_type! { bson::EncoderError,      BsonEncoding,       "BSON encoding error" }
+impl_error_type! { bson::DecoderError,      BsonDecoding,       "BSON decoding error" }
+impl_error_type! { bson::oid::Error,        ObjectIdGeneration, "ObjectId generation error" }
+impl_error_type! { mongodb::error::Error,   MongoDbError,       "MongoDB error" }
 impl_error_type! {
-    mongodb::coll::error::WriteException,
+    mongodb::error::WriteError,
     MongoDbWriteException,
     "MongoDB write exception"
 }
 impl_error_type! {
-    mongodb::coll::error::BulkWriteException,
+    mongodb::error::BulkWriteError,
     MongoDbBulkWriteException,
-    "MongoDB bulk write exception"
+    "MongoDB bulk write error"
 }

@@ -2,11 +2,11 @@
 
 use serde::{ Serialize, Deserialize };
 use mongodb::{
-    common::WriteConcern,
-    coll::options::{
+    options::{
         IndexModel,
         FindOptions,
         CountOptions,
+        WriteConcern,
         DistinctOptions,
         AggregateOptions,
         InsertManyOptions,

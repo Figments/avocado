@@ -3,10 +3,10 @@
 use std::fmt::Debug;
 use serde::Deserialize;
 use bson::{ Bson, Document };
-use mongodb::common::WriteConcern;
-use mongodb::coll::options::{
+use mongodb::options::{
     FindOptions,
     CountOptions,
+    WriteConcern,
     DistinctOptions,
     AggregateOptions,
     FindOneAndUpdateOptions,

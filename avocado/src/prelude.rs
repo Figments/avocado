@@ -15,10 +15,9 @@ pub use crate::{
 };
 pub use bson::{ Bson, Document, oid::ObjectId, doc, bson };
 pub use mongodb::{
-    Client, ThreadedClient,
-    db::Database,
-    coll::options::{
-        IndexModel, IndexOptions, FindOptions,
+    Client, Database,
+    options::{
+        IndexModel, FindOptions,
         FindOneAndUpdateOptions, ReturnDocument,
     },
 };

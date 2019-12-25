@@ -11,13 +11,13 @@ use std::hash::{ Hash, Hasher };
 use std::fmt::{ Debug, Formatter, Result as FmtResult };
 use serde::Deserialize;
 use bson::{ Bson, Document, from_bson };
-use mongodb::coll::options::{
+use mongodb::options::{
     UpdateOptions,
     FindOneAndDeleteOptions,
     FindOneAndUpdateOptions,
     ReturnDocument,
 };
-use mongodb::coll::results::UpdateResult;
+use mongodb::results::UpdateResult;
 use typemap::Key;
 use crate::{
     cursor::Cursor,
@@ -32,7 +32,7 @@ use crate::{
 /// A statically-typed (homogeneous) `MongoDB` collection.
 pub struct Collection<T: Doc> {
     /// The backing `MongoDB` collection.
-    inner: mongodb::coll::Collection,
+    inner: mongodb::Collection,
     /// Just here so that the type parameter is used.
     _marker: PhantomData<T>,
 }
@@ -534,8 +534,8 @@ impl<T: Doc> Debug for Collection<T> {
 }
 
 #[doc(hidden)]
-impl<T: Doc> From<mongodb::coll::Collection> for Collection<T> {
-    fn from(collection: mongodb::coll::Collection) -> Self {
+impl<T: Doc> From<mongodb::Collection> for Collection<T> {
+    fn from(collection: mongodb::Collection) -> Self {
         Collection {
             inner: collection,
             _marker: PhantomData,
