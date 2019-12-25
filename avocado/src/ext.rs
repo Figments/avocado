@@ -5,7 +5,7 @@ use crate::error::{ Error, Result };
 
 /// Convenience methods for implementing `transform()` methods in various
 /// traits in the [`ops`](ops/index.html) module.
-#[allow(clippy::stutter)]
+#[allow(clippy::module_name_repetitions)]
 pub trait DocumentExt {
     /// Remove the value corresponding to the given key. Return an error if
     /// no such key-value pair is present in the document.
@@ -226,33 +226,33 @@ mod tests {
         assert_eq!(d.remove_document("oid_value").unwrap_err().kind(),
                    ErrorKind::IllTypedDocumentField);
 
-        assert_eq!(d.try_remove("null_value").unwrap(), Bson::Null);
+        assert_eq!(d.try_remove("null_value").expect("Error removing null value."), Bson::Null);
         assert_eq!(d.try_remove("null_value").unwrap_err().kind(),
                    ErrorKind::MissingDocumentField);
         assert_eq!(d.try_remove("bogus_value").unwrap_err().kind(),
                    ErrorKind::MissingDocumentField);
 
-        assert_eq!(d.remove_number("number_value").unwrap(),
+        assert_eq!(d.remove_number("number_value").expect("Error removing number value."),
                    Bson::FloatingPoint(2.718281829));
-        assert_eq!(d.remove_i32("i32_value").unwrap(),
+        assert_eq!(d.remove_i32("i32_value").expect("Error removing i32 value."),
                    Bson::I32(42));
-        assert_eq!(d.remove_i64("i64_value").unwrap(),
+        assert_eq!(d.remove_i64("i64_value").expect("Error removing i64 value."),
                    Bson::I64(1337));
-        assert_eq!(d.remove_array("array_value").unwrap(),
+        assert_eq!(d.remove_array("array_value").expect("Error removing array value."),
                    bson!([-0.00729735257, "stuff", [], { "key": "value" }]));
-        assert_eq!(d.remove_document("document_value").unwrap(),
+        assert_eq!(d.remove_document("document_value").expect("Error removing document value."),
                    bson!({
                        "foo": "bar",
                        "qux": [0],
                    }));
         assert_eq!(d.remove_document("document_value").unwrap_err().kind(),
                    ErrorKind::MissingDocumentField);
-        assert_eq!(d.remove_str("string_value").unwrap(),
+        assert_eq!(d.remove_str("string_value").expect("Error removing string value."),
                    Bson::from("whatever"));
-        assert_eq!(d.remove_bool("bool_value").unwrap(),
+        assert_eq!(d.remove_bool("bool_value").expect("Error removing boolean value."),
                    Bson::Boolean(true));
         assert!(
-            d.remove_object_id("oid_value").unwrap().as_object_id().is_some()
+            d.remove_object_id("oid_value").expect("Error removing OID value.").as_object_id().is_some()
         );
 
         assert_eq!(

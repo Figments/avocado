@@ -96,7 +96,7 @@ impl Query<User> for UsersBornBetween {
 // Putting it all together.
 
 #[derive(Debug)]
-struct AnyError(Box<Error>); // fast and loose, don't do this in prod
+struct AnyError(Box<dyn Error>); // fast and loose, don't do this in prod
 
 impl fmt::Display for AnyError {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {

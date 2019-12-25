@@ -675,7 +675,7 @@
 #![allow(clippy::single_match, clippy::match_same_arms, clippy::match_ref_pats,
          clippy::clone_on_ref_ptr, clippy::needless_pass_by_value)]
 #![deny(clippy::wrong_pub_self_convention, clippy::used_underscore_binding,
-        clippy::stutter, clippy::similar_names, clippy::pub_enum_variant_names,
+        clippy::module_name_repetitions, clippy::similar_names, clippy::pub_enum_variant_names,
         clippy::missing_docs_in_private_items,
         clippy::non_ascii_literal, clippy::unicode_not_nfc,
         clippy::result_unwrap_used, clippy::option_unwrap_used,

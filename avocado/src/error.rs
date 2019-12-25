@@ -10,7 +10,7 @@ use backtrace::Backtrace;
 use typemap::{ DebugMap, Key };
 
 /// Slightly augmented trait for backtrace-able errors.
-#[allow(clippy::stutter)]
+#[allow(clippy::module_name_repetitions)]
 pub trait ErrorExt: error::Error {
     /// Similar to `std::error::Error::source()`, but with richer type info.
     fn reason(&self) -> Option<&(dyn ErrorExt + 'static)> {
@@ -89,7 +89,7 @@ impl<F> ErrMsg for F where F: FnOnce() -> String {
 }
 
 /// A structured, "machine-readable" error kind.
-#[allow(clippy::stutter)]
+#[allow(clippy::module_name_repetitions)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub enum ErrorKind {
     /// There was an error converting between JSON and a strongly-typed value.
